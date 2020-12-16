@@ -1,0 +1,48 @@
+﻿@using NinjaManager.Web.Models.Ninjas
+
+@model ClearModel
+
+@{
+    ViewBag.Title = $"Clear {Model.Name}";
+}
+
+<h1>Clear Inventory</h1>
+<p class="text-danger">@ViewData["ErrorMessage"]</p>
+<h3>Are you sure you want to clear this ninja's inventory?</h3>
+<div>
+    <h4>Ninja</h4>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Gold)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Gold)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Gears)
+        </dt>
+        <dd class="col-sm-10">
+            <ul>
+                @foreach (var gear in Model.Gears)
+                {
+                    <li>
+                        @gear.Name: @gear.Gold
+                    </li>
+                }
+            </ul>
+        </dd>
+    </dl>
+
+    <form asp-action="Clear">
+        <input type="hidden" asp-for="Id"/>
+        <input type="submit" value="Clear" class="btn btn-warning"/> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

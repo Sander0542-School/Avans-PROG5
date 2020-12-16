@@ -1,0 +1,23 @@
+﻿@model KeyValuePair<NinjaManager.Data.Models.Gear.GearCategory, NinjaManager.Web.Models.Ninjas.DetailsModel.Gear>
+
+<div class="card">
+    <span class="card-header">
+        @Model.Key: @(Model.Value?.Name ?? "None")
+    </span>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-6">Strength</dt>
+            <dd class="col-sm-6">
+                @(Model.Value?.Strength ?? 0)
+            </dd>
+            <dt class="col-sm-6">Agility</dt>
+            <dd class="col-sm-6">
+                @(Model.Value?.Agility ?? 0)
+            </dd>
+            <dt class="col-sm-6">Intelligence</dt>
+            <dd class="col-sm-6">
+                @(Model.Value?.Intelligence ?? 0)
+            </dd>
+        </dl>
+    </div>
+</div>

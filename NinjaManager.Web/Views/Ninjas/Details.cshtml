@@ -1,0 +1,63 @@
+﻿@using NinjaManager.Data.Models
+@using NinjaManager.Web.Models.Ninjas
+
+@model DetailsModel
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<h1>@Model.Name</h1>
+
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Gold)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Gold)
+    </dd>
+</dl>
+<dl class="row">
+    <dt class="col-sm-2">Total Strength</dt>
+    <dd class="col-sm-10">
+        @Model.Gears.Sum(pair => pair.Value.Strength)
+    </dd>
+    <dt class="col-sm-2">Total Agility</dt>
+    <dd class="col-sm-10">
+        @Model.Gears.Sum(pair => pair.Value.Agility)
+    </dd>
+    <dt class="col-sm-2">Total Intelligence</dt>
+    <dd class="col-sm-10">
+        @Model.Gears.Sum(pair => pair.Value.Intelligence)
+    </dd>
+</dl>
+<dl class="row">
+    <dt class="col-sm-2">Gear Value</dt>
+    <dd class="col-sm-10">
+        @Model.Gears.Sum(pair => pair.Value.Gold)
+    </dd>
+</dl>
+
+<div class="row flex">
+    <div class="col-sm-4">
+        <partial name="_NinjaGear" model="@(Model.GetGear(Gear.GearCategory.Head))"/>
+        <br/>
+        <partial name="_NinjaGear" model="@(Model.GetGear(Gear.GearCategory.Hand))"/>
+        <br/>
+        <partial name="_NinjaGear" model="@(Model.GetGear(Gear.GearCategory.Feet))"/>
+        <br/>
+    </div>
+    <div class="col-sm-4 text-center">
+        <p>
+            <img style="max-width: 70%;" src="/img/ninja.png" alt="Ninja"/>
+        </p>
+    </div>
+    <div class="col-sm-4">
+        <partial name="_NinjaGear" model="@(Model.GetGear(Gear.GearCategory.Necklace))"/>
+        <br/>
+        <partial name="_NinjaGear" model="@(Model.GetGear(Gear.GearCategory.Chest))"/>
+        <br/>
+        <partial name="_NinjaGear" model="@(Model.GetGear(Gear.GearCategory.Ring))"/>
+        <br/>
+    </div>
+</div>

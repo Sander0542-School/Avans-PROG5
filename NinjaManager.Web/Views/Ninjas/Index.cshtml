@@ -1,0 +1,54 @@
+﻿@using NinjaManager.Web.Models.Ninjas
+
+@model IndexModel
+
+@{
+    ViewBag.Title = "Ninjas";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="row">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ninjas.FirstOrDefault().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ninjas.FirstOrDefault().Gold)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ninjas.FirstOrDefault().Gears)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var ninja in Model.Ninjas)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => ninja.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => ninja.Gold)
+                </td>
+                <td>
+                    @String.Join(", ", ninja.Gears)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@ninja.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@ninja.Id">Details</a> |
+                    <a asp-action="Clear" asp-route-id="@ninja.Id">Clear Inventory</a> |
+                    <a asp-controller="Shop" asp-route-ninjaId="@ninja.Id">Shop</a> |
+                    <a asp-action="Delete" asp-route-id="@ninja.Id">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
