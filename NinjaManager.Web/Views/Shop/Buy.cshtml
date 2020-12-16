@@ -1,0 +1,54 @@
+﻿@using NinjaManager.Web.Models.Shop
+
+@model BuySellModel
+
+@{
+    ViewBag.Title = $"Buy {Model.Gear.Name}";
+    Layout = "_Layout";
+}
+
+<h1>Buy @Model.Gear.Name</h1>
+<p class="text-danger">@ViewData["ErrorMessage"]</p>
+<h3>Are you sure you want to buy @Model.Gear.Name for @Model.Ninja.Name?</h3>
+<div>
+    <h4>Ninja</h4>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ninja.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ninja.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ninja.Gold)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ninja.Gold)
+        </dd>
+    </dl>
+
+    <h4>Gear</h4>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Gear.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Gear.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Gear.Gold)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Gear.Gold)
+        </dd>
+    </dl>
+
+    <form asp-action="Buy">
+        <input type="hidden" asp-for="Ninja.Id"/>
+        <input type="hidden" asp-for="Gear.Id"/>
+        <input type="submit" value="Buy" class="btn btn-danger"/> |
+        <a asp-action="Index">Back to Shop</a>
+    </form>
+</div>

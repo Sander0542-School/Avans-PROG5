@@ -6,7 +6,7 @@ using NinjaManager.Data.Models;
 
 namespace NinjaManager.Data.Repositories
 {
-    public class NinjaRepository : IRepository
+    public class NinjaRepository : IRepository<Ninja>
     {
         private ApplicationDbContext _context;
 

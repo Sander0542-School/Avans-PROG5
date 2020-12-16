@@ -1,0 +1,105 @@
+﻿@using NinjaManager.Web.Models.Shop
+
+@model IndexModel
+
+@{
+    ViewBag.Title = $"Shop for {Model.Ninja.Name}";
+}
+
+<dl class="row">
+    <dt class="col-sm-10">
+        <h1>Shop for <a asp-controller="Ninjas" asp-action="Details" asp-route-id="@Model.Ninja.Id">@Model.Ninja.Name</a></h1>
+    </dt>
+    <dt class="col-sm-2">
+        <form method="get" asp-action="Index" asp-route-ninjaId="@Model.Ninja.Id">
+            <select class="form-control" name="category" onchange="this.form.submit();">
+                <option value="ShowAll">Show all</option>
+                @foreach (var category in Model.Gears.Keys)
+                {
+                    <option selected="@(Model.Category.HasValue && Model.Category.Value == category)" value="@category">@category</option>
+                }
+            </select>
+        </form>
+    </dt>
+</dl>
+
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Ninja.Gold)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Ninja.Gold)
+    </dd>
+</dl>
+
+
+@foreach (var pair in Model.Gears)
+{
+    if (!Model.Category.HasValue || Model.Category.Value == pair.Key)
+    {
+        var gears = pair.Value;
+
+        <h2>@pair.Key</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => gears.FirstOrDefault().Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => gears.FirstOrDefault().Gold)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => gears.FirstOrDefault().Strength)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => gears.FirstOrDefault().Agility)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => gears.FirstOrDefault().Intelligence)
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var gear in gears)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => gear.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => gear.Gold)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => gear.Strength)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => gear.Agility)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => gear.Intelligence)
+                    </td>
+                    <td>
+                        @switch (gear.State)
+                        {
+                            case IndexModel.Gear.GearState.Bought:
+                                <a asp-action="Sell" asp-route-ninjaId="@Model.Ninja.Id" asp-route-id="@gear.Id">Sell</a>
+                                break;
+                            case IndexModel.Gear.GearState.OwnsCategory:
+                                <span>Already owns @pair.Key</span>
+                                break;
+                            case IndexModel.Gear.GearState.Expensive:
+                                <span>Not enough money</span>
+                                break;
+                            case IndexModel.Gear.GearState.Available:
+                                <a asp-action="Buy" asp-route-ninjaId="@Model.Ninja.Id" asp-route-id="@gear.Id">Buy</a>
+                                break;
+                        }
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+}

@@ -4,7 +4,7 @@ using NinjaManager.Data.Models;
 
 namespace NinjaManager.Data.Repositories
 {
-    public class GearsRepository : IRepository
+    public class GearsRepository : IRepository<Gear>
     {
         private ApplicationDbContext _context;
 
@@ -13,27 +13,27 @@ namespace NinjaManager.Data.Repositories
             _context = context;
         }
 
-        public Task<List<Ninja>> GetAll()
+        public Task<List<Gear>> GetAll()
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<Ninja> Get(int id)
+        public Task<Gear> Get(int id)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> Create(Ninja ninja)
+        public Task<bool> Create(Gear gear)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> Update(Ninja ninja)
+        public Task<bool> Update(Gear gear)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> Delete(Ninja ninja)
+        public Task<bool> Delete(Gear gear)
         {
             throw new System.NotImplementedException();
         }
