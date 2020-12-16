@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - NinjaManager.Web</title>
+    <title>@ViewData["Title"] - Ninja manager</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css"/>
 </head>
@@ -11,18 +11,21 @@
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">NinjaManager.Web</a>
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Ninja manager</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Ninjas" asp-action="Index">Ninjas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Gears" asp-action="Index">Gear</a>
                     </li>
                 </ul>
             </div>
@@ -37,7 +40,7 @@
 
 <footer class="border-top footer text-muted">
     <div class="container">
-        &copy; 2020 - NinjaManager.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        &copy; 2020 - Ninja manager
     </div>
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
