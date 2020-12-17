@@ -13,9 +13,7 @@ namespace NinjaManager.Web.Models.Ninjas
 
         public KeyValuePair<Data.Models.Gear.GearCategory, Gear> GetGear(Data.Models.Gear.GearCategory category)
         {
-            var pair = Gears.FirstOrDefault(valuePair => valuePair.Key == category);
-
-            return pair ?? new KeyValuePair<Data.Models.Gear.GearCategory, Gear>(category, null);
+            return Gears.ContainsKey(category) ? Gears.First(valuePair => valuePair.Key == category) : new KeyValuePair<Data.Models.Gear.GearCategory, Gear>(category, null);
         }
 
         public class Gear
