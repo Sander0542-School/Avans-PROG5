@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using NinjaManager.Data.Models;
 
 namespace NinjaManager.Data.Repositories
 {
-    public class GearsRepository : IRepository
+    public class GearsRepository
     {
         private ApplicationDbContext _context;
 
@@ -13,29 +15,60 @@ namespace NinjaManager.Data.Repositories
             _context = context;
         }
 
-        public Task<List<Ninja>> GetAll()
+        public async Task<List<Gear>> GetAll()
         {
-            throw new System.NotImplementedException();
+            return await _context.Gears
+                .Include(gear => gear.NinjaGears)
+                .ToListAsync();
         }
 
-        public Task<Ninja> Get(int id)
+        public async Task<Gear> Get(int id)
         {
-            throw new System.NotImplementedException();
+            return await _context.Gears
+                .Include(gear => gear.NinjaGears)
+                .FirstOrDefaultAsync(gear => gear.Id == id);
         }
 
-        public Task<bool> Create(Ninja ninja)
+        public async Task<bool> Create(Gear gear)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                _context.Add(gear);
+
+                return await _context.SaveChangesAsync() > 0;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-        public Task<bool> Update(Ninja ninja)
+        public async Task<bool> Update(Gear gear)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                _context.Entry(gear).State = EntityState.Modified;
+
+                return await _context.SaveChangesAsync() > 0;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-        public Task<bool> Delete(Ninja ninja)
+        public async Task<bool> Delete(Gear gear)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                _context.Remove(gear);
+
+                return await _context.SaveChangesAsync() > 0;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
