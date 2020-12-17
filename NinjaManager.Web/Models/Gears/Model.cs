@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using NinjaManager.Data.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace NinjaManager.Web.Models.Gears
 {
-    public class DeleteModel
+    public class Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -10,16 +14,6 @@ namespace NinjaManager.Web.Models.Gears
         public int Strength { get; set; }
         public int Intelligence { get; set; }
         public int Agility { get; set; }
-        public GearCategory Category { get; set; }
-
-        public enum GearCategory
-        {
-            Head,
-            Chest,
-            Hand,
-            Feet,
-            Ring,
-            Necklace
-        }
+        public Gear.GearCategory Category { get; set; }
     }
 }

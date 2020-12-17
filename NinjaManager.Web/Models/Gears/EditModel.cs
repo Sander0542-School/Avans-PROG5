@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using NinjaManager.Data.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace NinjaManager.Web.Models.Gears
 {
@@ -23,16 +24,6 @@ namespace NinjaManager.Web.Models.Gears
         public int Agility { get; set; }
 
         [Required]
-        public GearCategory Category { get; set; }
-
-        public enum GearCategory
-        {
-            Head,
-            Chest,
-            Hand,
-            Feet,
-            Ring,
-            Necklace
-        }
+        public Gear.GearCategory Category { get; set; }
     }
 }

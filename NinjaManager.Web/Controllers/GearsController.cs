@@ -20,7 +20,7 @@ namespace NinjaManager.Web.Controllers
         {
             var gears = await _gearsRepository.GetAll();
 
-            var model = gears.Select(gear => new IndexModel
+            var model = gears.Select(gear => new Model
             {
                 Id = gear.Id,
                 Name = gear.Name,
@@ -28,7 +28,7 @@ namespace NinjaManager.Web.Controllers
                 Strength = gear.Strength,
                 Intelligence = gear.Intelligence,
                 Agility = gear.Agility,
-                Category = (IndexModel.GearCategory)gear.Category
+                Category = gear.Category
             });
 
             return View(model);
@@ -48,7 +48,7 @@ namespace NinjaManager.Web.Controllers
                 return NotFound();
             }
 
-            var model = new DetailsModel
+            var model = new Model
             {
                 Id = gear.Id,
                 Name = gear.Name,
@@ -56,7 +56,7 @@ namespace NinjaManager.Web.Controllers
                 Strength = gear.Strength,
                 Intelligence = gear.Intelligence,
                 Agility = gear.Agility,
-                Category = (DetailsModel.GearCategory)gear.Category
+                Category = gear.Category
             };
 
             return View(model);
@@ -79,7 +79,7 @@ namespace NinjaManager.Web.Controllers
                     Strength = createModel.Strength,
                     Intelligence = createModel.Intelligence,
                     Agility = createModel.Agility,
-                    Category = (Gear.GearCategory)createModel.Category
+                    Category = createModel.Category
                 };
 
                 if (await _gearsRepository.Create(gear))
@@ -115,7 +115,7 @@ namespace NinjaManager.Web.Controllers
                 Strength = gear.Strength,
                 Intelligence = gear.Intelligence,
                 Agility = gear.Agility,
-                Category = (EditModel.GearCategory)gear.Category
+                Category = gear.Category
             };
 
             return View(model);
@@ -139,7 +139,7 @@ namespace NinjaManager.Web.Controllers
                 gear.Strength = editModel.Strength;
                 gear.Intelligence = editModel.Intelligence;
                 gear.Agility = editModel.Agility;
-                gear.Category = (Gear.GearCategory)editModel.Category;
+                gear.Category = editModel.Category;
 
                 if (await _gearsRepository.Update(gear))
                 {
@@ -166,7 +166,7 @@ namespace NinjaManager.Web.Controllers
                 return NotFound();
             }
 
-            var model = new DeleteModel
+            var model = new Model
             {
                 Id = gear.Id,
                 Name = gear.Name,
@@ -174,7 +174,7 @@ namespace NinjaManager.Web.Controllers
                 Strength = gear.Strength,
                 Intelligence = gear.Intelligence,
                 Agility = gear.Agility,
-                Category = (DeleteModel.GearCategory)gear.Category
+                Category = gear.Category
             };
 
             if (saveChangesError.GetValueOrDefault())
@@ -196,7 +196,11 @@ namespace NinjaManager.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            // TODO: Payback all the ninjas using this gear
+            foreach (NinjaGear ninjaGear in gear.NinjaGears)
+            {
+                ninjaGear.Ninja.Gold += gear.Gold;
+            }
+
             gear.NinjaGears.Clear();
 
             if (await _gearsRepository.Delete(gear))

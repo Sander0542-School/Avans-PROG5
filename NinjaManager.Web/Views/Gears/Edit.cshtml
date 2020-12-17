@@ -1,4 +1,4 @@
-﻿@using NinjaManager.Web.Models.Gears
+﻿@using NinjaManager.Data.Models
 @model NinjaManager.Web.Models.Gears.EditModel
 
 @{
@@ -42,7 +42,7 @@
             <div class="form-group">
                 <label asp-for="Category" class="control-label"></label>
                 <select asp-for="Category" class="form-control">
-                    @foreach (EditModel.GearCategory category in Enum.GetValues(typeof(EditModel.GearCategory)))
+                    @foreach (Gear.GearCategory category in Enum.GetValues(typeof(Gear.GearCategory)))
                     {
                         <option selected="@(category == Model.Category)" name="@category">@category</option>
                     }
