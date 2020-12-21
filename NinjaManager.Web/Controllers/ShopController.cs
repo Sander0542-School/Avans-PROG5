@@ -35,7 +35,7 @@ namespace NinjaManager.Web.Controllers
             var model = new IndexModel
             {
                 Category = category,
-                Ninja = new IndexModel.NinjaModel
+                Ninja = new NinjaModel
                 {
                     Id = ninja.Id,
                     Name = ninja.Name,
@@ -87,7 +87,7 @@ namespace NinjaManager.Web.Controllers
 
             var model = new BuySellModel
             {
-                Ninja = new BuySellModel.NinjaModel
+                Ninja = new NinjaModel
                 {
                     Id = ninja.Id,
                     Name = ninja.Name,
@@ -164,7 +164,7 @@ namespace NinjaManager.Web.Controllers
 
             return View(new BuySellModel
             {
-                Ninja = new BuySellModel.NinjaModel
+                Ninja = new NinjaModel
                 {
                     Id = ninja.Id,
                     Name = ninja.Name,
