@@ -196,7 +196,7 @@ namespace NinjaManager.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            foreach (NinjaGear ninjaGear in gear.NinjaGears)
+            foreach (var ninjaGear in gear.NinjaGears)
             {
                 ninjaGear.Ninja.Gold += gear.Gold;
             }

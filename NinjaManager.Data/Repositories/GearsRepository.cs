@@ -26,6 +26,7 @@ namespace NinjaManager.Data.Repositories
         {
             return await _context.Gears
                 .Include(gear => gear.NinjaGears)
+                .ThenInclude(ninjaGear => ninjaGear.Ninja)
                 .FirstOrDefaultAsync(gear => gear.Id == id);
         }
 
